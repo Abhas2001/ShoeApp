@@ -2,11 +2,23 @@ import t1 from '../src/images/t1.svg'
 import cart from '../src/images/cart.svg'
 
 import data from '../src/data.json'
+import { useState } from 'react'
 
 export default function App() {
   
 
+  const[selected,setSelected] = useState('Jordan');
 
+  const Brands = ['Jordan','Nike','Puma','FLS']
+ 
+
+  const handleSelected = (value) =>{
+
+    console.log(value);
+         setSelected(value);
+    
+  }
+  // console.log(selected,"selected");
 
   return (
 
@@ -42,17 +54,23 @@ export default function App() {
         </button>
       </section>
 
-      <section className='ml-6 mt-6 flex gap-4'>
-        <div className='w-[130px] h-[50px] rounded-lg border-2 border-[#292929] bg-[#292929] flex justify-center items-center'>
-           <span className='font-bold text-[20px] text-[#FFFFFF]'>
-            Jordan
-           </span>
-        </div>
-        <div className='w-[130px] h-[50px] rounded-lg border-2 border-[#292929] bg-[#292929] flex justify-center items-center'>
-           <span className='font-bold text-[20px] text-[#FFFFFF]'>
+      <section className='ml-6 mt-6 flex gap-4 shrink-0 overflow-x-auto'>
+        {Brands.map((x)=>{
+          return (
+            <div onClick={(e)=>handleSelected(e.target.innerText)} className={`w-[130px] h-[50px] rounded-lg border-2 border-[#292929] ${selected===x?'bg-[#292929]':'bg-[#BFD6EB]'} flex justify-center items-center shrink-0`}>
+            <span  className={`font-bold text-[20px] ${selected===x?'text-[#ffffff]':'text-[#9B9B9B]'}`}>
+               {x}
+            </span>
+         </div>
+          )
+        })
+    
+}
+        {/* <div onClick={()=>handleSelected('Nike')} className='w-[130px] h-[50px] rounded-lg border-2 border-[#292929] bg-[#292929] flex justify-center items-center'>
+           <span className='font-bold text-[20px] text-[#9B9B9B]'>
           Nike
            </span>
-        </div>
+        </div> */}
       </section>
 
       <section className='mt-4 ml-6 w-full flex gap-36 items-center'>
