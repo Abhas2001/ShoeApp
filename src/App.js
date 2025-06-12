@@ -10,7 +10,7 @@ export default function App() {
 
   return (
 
-    <section className="w-full h-screen bg-[#BFD6EB] overflow-hidden">
+    <section className="w-full h-screen bg-[#BFD6EB] overflow-y-auto overflow-x-hidden ">
       <section className='flex justify-between items-center w-full'>
       <img alt='banner' src={t1}/>
       <span className="font-schoolbell text-lg">SNEAKER2SR</span>
@@ -67,7 +67,7 @@ export default function App() {
 
 
 
-      <section className='mt-4 ml-6 flex gap-4 overflow-x-scroll'>
+      <section className='mt-4 ml-6 grid grid-cols-2 gap-4 overflow-y-auto'>
 
       {Object.values(data).map((value)=>{
         
@@ -90,7 +90,7 @@ export default function App() {
     </section>
     )
   }
-  return null; 
+  
 
  })
 }
