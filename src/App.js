@@ -7,9 +7,9 @@ import { useState } from 'react'
 export default function App() {
   
 
-  const[selected,setSelected] = useState('Jordan');
+  const[selected,setSelected] = useState('NIKE');
 
-  const Brands = ['Jordan','Nike','Puma','FLS']
+  const Brands = ['NIKE','Vans','ADIDAS','HUSHPUPPIES']
  
 
   const handleSelected = (value) =>{
@@ -18,7 +18,7 @@ export default function App() {
          setSelected(value);
     
   }
-  // console.log(selected,"selected");
+  console.log(data,"selected");
 
   return (
 
@@ -57,9 +57,10 @@ export default function App() {
       <section className='ml-6 mt-6 flex gap-4 shrink-0 overflow-x-auto'>
         {Brands.map((x)=>{
           return (
-            <div onClick={(e)=>handleSelected(e.target.innerText)} className={`w-[130px] h-[50px] rounded-lg border-2 border-[#292929] ${selected===x?'bg-[#292929]':'bg-[#BFD6EB]'} flex justify-center items-center shrink-0`}>
+            <div onClick={(e)=>handleSelected(e.target.innerText)} className={` w-[130px] h-[50px] rounded-lg border-2 border-[#292929] ${selected===x?'bg-[#292929]':'bg-[#BFD6EB]'} flex justify-center items-center shrink-0`}>
             <span  className={`font-bold text-[20px] ${selected===x?'text-[#ffffff]':'text-[#9B9B9B]'}`}>
-               {x}
+
+               {x==='HUSHPUPPIES'?'HUSHP':x}
             </span>
          </div>
           )
@@ -89,7 +90,7 @@ export default function App() {
 
       {Object.values(data).map((value)=>{
         
-  if(value.brand==='NIKE'){
+  if(value.brand===selected){
     return(
       <section>
       <div className='w-[157px] h-[157px] bg-[#FFFFFF] rounded-md flex justify-center items-center shrink-0'>
