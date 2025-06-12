@@ -1,6 +1,6 @@
 import t1 from '../src/images/t1.svg'
 import cart from '../src/images/cart.svg'
-import hey from '../src/images/hey.svg'
+
 import data from '../src/data.json'
 
 export default function App() {
@@ -12,11 +12,11 @@ export default function App() {
 
     <section className="w-full h-screen bg-[#BFD6EB] overflow-hidden">
       <section className='flex justify-between items-center w-full'>
-      <img src={t1}/>
+      <img alt='banner' src={t1}/>
       <span className="font-schoolbell text-lg">SNEAKER2SR</span>
 
       <span>
-        <img src={cart}/>
+        <img alt='cart' src={cart}/>
       </span>
 
       </section>
@@ -75,7 +75,7 @@ export default function App() {
     return(
       <section>
       <div className='w-[157px] h-[157px] bg-[#FFFFFF] rounded-md flex justify-center items-center shrink-0'>
-      <img className='w-[137px] h-[75px] object-cover'  src={value.imageURL}/>
+      <img alt='value' className='w-[137px] h-[75px] object-cover'  src={value.imageURL}/>
     </div>
 
     <div>
