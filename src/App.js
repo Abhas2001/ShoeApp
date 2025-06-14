@@ -39,9 +39,7 @@ useEffect(()=>{
     console.log(inputval.length,'Length');
     
   },[inputval])
-   searchedRes.map((x)=>{
-    console.log(x,"this is the searched array");
-   })
+ 
 
 
   return (
