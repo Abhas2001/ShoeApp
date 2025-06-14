@@ -1,6 +1,6 @@
 import t1 from '../src/images/t1.svg'
 import cart from '../src/images/cart.svg'
-import hi from '../src/images/hi.webp'
+
 
 import data from '../src/data.json'
 import { useEffect, useState } from 'react'
@@ -60,9 +60,7 @@ useEffect(()=>{
         <span className='text-[30px]'>
           Hello!
         </span>
-        <span>
-          <img className='w-12 h-12' src={hi}/>
-        </span>
+      
       </section>
 
       <section className='ml-6 mt-4'>
