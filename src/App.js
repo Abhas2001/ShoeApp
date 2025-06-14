@@ -2,12 +2,14 @@ import t1 from '../src/images/t1.svg'
 import cart from '../src/images/cart.svg'
 
 import data from '../src/data.json'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 export default function App() {
   
 
   const[selected,setSelected] = useState('NIKE');
+  const[inputval,setInputVal] = useState('');
+  const[searchedRes,setSearchedRes] = useState([]);
 
   const Brands = ['NIKE','Vans','ADIDAS','HUSHPUPPIES']
  
@@ -15,10 +17,32 @@ export default function App() {
   const handleSelected = (value) =>{
 
     console.log(value);
-         setSelected(value);
+         setSelected(value==='HUSHP'?'HUSHPUPPIES':value);
     
   }
-  console.log(data,"selected");
+  
+
+  const handleChange = (x) =>{
+    setInputVal(x)
+  
+  }
+
+
+
+useEffect(()=>{
+
+  let result =  Object.values(data).filter((x)=>
+      x.name.toLocaleLowerCase().includes(inputval)
+    )
+
+    setSearchedRes(result);
+    console.log(inputval.length,'Length');
+    
+  },[inputval])
+   searchedRes.map((x)=>{
+    console.log(x,"this is the searched array");
+   })
+
 
   return (
 
@@ -40,7 +64,7 @@ export default function App() {
       </section>
 
       <section className='ml-6 mt-4'>
-        <input placeholder='Search' className='w-[300px] border-2 px-4 py-[10px] rounded-md border-[#C5C5C5] bg-[#C5C5C5]'/>
+        <input onChange={(e)=>handleChange(e.target.value)} placeholder='Search' className='w-[300px] border-2 px-4 py-[10px] rounded-md border-[#C5C5C5] bg-[#C5C5C5]'/>
       </section>
  
 
@@ -85,7 +109,32 @@ export default function App() {
       </section>
 
 
+       <section>
+        {inputval.length>0?
+         <section className='mt-4 ml-6 grid grid-cols-2 gap-4 overflow-y-auto'>
+                 {searchedRes.map((value)=>{
+                  return(
+                    <section>
+                    <div className='w-[157px] h-[157px] bg-[#FFFFFF] rounded-md flex justify-center items-center shrink-0'>
+                    <img alt='value' className='w-[137px] h-[75px] object-cover'  src={value.imageURL}/>
+                  </div>
+              
+                  <div>
+                      <span className='text-[16px] font-medium'>
+                        {value.name}
+                      </span>
+                      <br/>
+                      <span className='font-bold text-[18px]'>
+                        {`$ ${value.price}`}
+                      </span>
+                  </div>
+                  </section>
+                  )
+                 })
 
+                 }
+         </section>
+         :
       <section className='mt-4 ml-6 grid grid-cols-2 gap-4 overflow-y-auto'>
 
       {Object.values(data).map((value)=>{
@@ -112,6 +161,8 @@ export default function App() {
   return null;
 
  })
+}
+      </section>
 }
       </section>
    
