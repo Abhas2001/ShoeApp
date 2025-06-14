@@ -36,7 +36,7 @@ useEffect(()=>{
     )
 
     setSearchedRes(result);
-    console.log(inputval.length,'Length');
+    console.log(result,'Length');
     
   },[inputval])
  
@@ -66,7 +66,7 @@ useEffect(()=>{
       </section>
  
 
-      <section className='mt-4 ml-6 w-full flex gap-40 items-center'>
+      <section className={`mt-4 ml-6 w-full flex gap-40 items-center ${inputval.length>0&&'hidden'} `}>
         <span className='text-[20px] font-extrabold text-[#000000]'>
           Select Brand
         </span>
@@ -76,7 +76,7 @@ useEffect(()=>{
         </button>
       </section>
 
-      <section className='ml-6 mt-6 flex gap-4 shrink-0 overflow-x-auto'>
+      <section className={`ml-6 mt-6 flex gap-4 shrink-0 overflow-x-auto ${inputval.length>0&&'hidden'} `}>
         {Brands.map((x)=>{
           return (
             <div onClick={(e)=>handleSelected(e.target.innerText)} className={` w-[130px] h-[50px] rounded-lg border-2 border-[#292929] ${selected===x?'bg-[#292929]':'bg-[#BFD6EB]'} flex justify-center items-center shrink-0`}>
@@ -89,14 +89,9 @@ useEffect(()=>{
         })
     
 }
-        {/* <div onClick={()=>handleSelected('Nike')} className='w-[130px] h-[50px] rounded-lg border-2 border-[#292929] bg-[#292929] flex justify-center items-center'>
-           <span className='font-bold text-[20px] text-[#9B9B9B]'>
-          Nike
-           </span>
-        </div> */}
       </section>
 
-      <section className='mt-4 ml-6 w-full flex gap-36 items-center'>
+      <section className={`mt-4 ml-6 w-full flex gap-36 items-center ${inputval.length>0&&'hidden'}`}>
         <span className='text-[25px] font-bold text-[#000000]'>
           New Arrival
         </span>
@@ -109,6 +104,8 @@ useEffect(()=>{
 
        <section>
         {inputval.length>0?
+
+        searchedRes.length>0?
          <section className='mt-4 ml-6 grid grid-cols-2 gap-4 overflow-y-auto'>
                  {searchedRes.map((value)=>{
                   return(
@@ -132,6 +129,9 @@ useEffect(()=>{
 
                  }
          </section>
+         :
+         <section className='w-full flex justify-center items-center mt-12'> <span className='text-[#FF0000] text-2xl '>No Products Found</span></section>
+                
          :
       <section className='mt-4 ml-6 grid grid-cols-2 gap-4 overflow-y-auto'>
 
