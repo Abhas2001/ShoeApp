@@ -9,7 +9,9 @@ export default function App() {
   const[selected,setSelected] = useState('NIKE');
   const[inputval,setInputVal] = useState('');
   const[searchedRes,setSearchedRes] = useState([]);
+  const[suggestedRes,setSuggestedRes] = useState([]);
   const[search,setSearch] = useState(false);
+  const[hideSuggest,setHideSuggest]=useState(false);
 
   const Brands = ['NIKE','Vans','ADIDAS','HUSHPUPPIES']
  
@@ -26,6 +28,7 @@ export default function App() {
     setInputVal(x)
   }
 useEffect(()=>{
+  setHideSuggest(false);
   if(inputval.length===0){
   setSearch(false)
   }
@@ -34,18 +37,31 @@ useEffect(()=>{
 
 useEffect(()=>{
 
-  console.log(search,"SEARCH");
+  let result =  Object.values(data).filter((x)=>
+  x.name.toLocaleLowerCase().includes(inputval)
+)
   
 if(search&&inputval.length>0){
-  let result =  Object.values(data).filter((x)=>
-      x.name.toLocaleLowerCase().includes(inputval)
-    )
+
 
     setSearchedRes(result);
-    console.log(result,'Length');
+  
 }
+ if(inputval.length>0){
+setSuggestedRes(result.slice(0,5));
+ }
+
+ 
     
-  },[search,inputval])
+  },[search,inputval,suggestedRes])
+
+
+  const handleSearched = (name) =>{
+    console.log(name,"MAKS");
+    setHideSuggest(true);
+    setInputVal(name.toLocaleLowerCase())
+    setSearch(true)
+  }
  
 
   return (
@@ -78,11 +94,28 @@ if(search&&inputval.length>0){
         }}
          onChange={(e)=>handleChange(e.target.value)}
           placeholder='Search'
+          value={inputval}
            className='w-[300px] border-2 px-4 py-[10px] rounded-md border-[#C5C5C5] bg-[#C5C5C5]'/>
+           
+           {inputval.length>0&&suggestedRes.map((x)=>{
+            return(
+              <div onClick={(e)=>handleSearched(e.target.innerText)}  className={`${hideSuggest&&'hidden'} w-[300px] truncate overflow-hidden whitespace-nowrap border-2 px-4 py-[10px] rounded-md border-b-[#393939] border-[#C5C5C5] bg-[#C5C5C5]`}>
+                <span>
+                {x.name}
+                </span>
+
+               
+              </div>
+            )
+           })
+          
+         
+}
+
       </section>
  
 
-      <section className={`mt-4 ml-6 w-full flex gap-40 items-center ${inputval.length>0&&search&&'hidden'} `}>
+      <section className={`mt-4 ml-6 w-full flex gap-40 items-center ${inputval.length>0&&'hidden'} `}>
         <span className='text-[20px] font-extrabold text-[#000000]'>
           Select Brand
         </span>
@@ -92,7 +125,7 @@ if(search&&inputval.length>0){
         </button>
       </section>
 
-      <section className={`ml-6 mt-6 flex gap-4 shrink-0 overflow-x-auto ${inputval.length>0&&search&&'hidden'} `}>
+      <section className={`ml-6 mt-6 flex gap-4 shrink-0 overflow-x-auto ${inputval.length>0&&'hidden'} `}>
         {Brands.map((x)=>{
           return (
             <div onClick={(e)=>handleSelected(e.target.innerText)} className={` w-[130px] h-[50px] rounded-lg border-2 border-[#292929] ${selected===x?'bg-[#292929]':'bg-[#BFD6EB]'} flex justify-center items-center shrink-0`}>
