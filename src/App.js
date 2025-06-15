@@ -45,7 +45,7 @@ if(search&&inputval.length>0){
     console.log(result,'Length');
 }
     
-  },[search])
+  },[search,inputval])
  
 
   return (
