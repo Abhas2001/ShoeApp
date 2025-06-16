@@ -121,6 +121,7 @@ setSuggestedRes(result.slice(0,5));
         }}
          onChange={(e)=>handleChange(e.target.value)}
           placeholder={inputval.length===0?'Search':{inputval}}
+          value={inputval}
           
            className='w-[300px] border-2 px-4 py-[10px] rounded-md border-[#C5C5C5] bg-[#C5C5C5]'/>
           {/* autosuggestion */}
