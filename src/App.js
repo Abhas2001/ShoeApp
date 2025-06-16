@@ -217,7 +217,7 @@ setSuggestedRes(result.slice(0,5));
               <img className='w-24 h-24' alt='loader' src={loader}/>
              </div>
         :
-      <section className='mt-4 mb-12 ml-6 grid grid-cols-2 gap-4 overflow-y-auto'>
+      <section className='mt-4 mb-12 ml-6 grid grid-cols-2 gap-4 '>
 
       {Object.values(data).map((value)=>{
         
@@ -225,8 +225,8 @@ setSuggestedRes(result.slice(0,5));
     return(
    
      
-        <section className='mb-4'>
-      <div className='w-[157px] h-[157px] bg-[#FFFFFF] rounded-md flex justify-center items-center shrink-0'>
+        <section className='mb-4 '>
+      <div className='w-[157px] h-[157px] bg-[#FFFFFF] rounded-md flex justify-center items-center shrink-0 shadow-2xl'>
       <img alt='value' className='w-[137px] h-[75px] object-cover'  src={value.imageURL}/>
     </div>
 
