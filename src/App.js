@@ -27,14 +27,25 @@ export default function App() {
   const handleChange = (x) =>{
     setInputVal(x)
   }
+
+  // useEffect(()=>{
+
+  //   console.log(hideSuggest,"HIDEEE");
+  //   if(hideSuggest){
+  //     setHideSuggest(false);
+  //    }
+  // },[hideSuggest])
 useEffect(()=>{
-  setHideSuggest(false);
+  if(hideSuggest){
+   setSuggestedRes([])
+  }
+  // setHideSuggest(false);
   if(inputval.length===0){
   setSearch(false)
   }
-},[inputval])
+},[inputval,hideSuggest])
 
-
+// eslint-disable-next-line react-hooks/exhaustive-deps
 useEffect(()=>{
 
   let result =  Object.values(data).filter((x)=>
@@ -47,17 +58,23 @@ if(search&&inputval.length>0){
     setSearchedRes(result);
   
 }
- if(inputval.length>0){
+
+ if(inputval.length>0&&!hideSuggest){
 setSuggestedRes(result.slice(0,5));
  }
-
  
-    
-  },[search,inputval,suggestedRes])
+ if(inputval.length===0){
+  setHideSuggest(false)
+ }
 
+    
+  },[inputval,hideSuggest,search])
+
+
+console.log(suggestedRes,"ARRAYSUGGEST");
 
   const handleSearched = (name) =>{
-    console.log(name,"MAKS");
+  
     setHideSuggest(true);
     setInputVal(name.toLocaleLowerCase())
     setSearch(true)
@@ -93,13 +110,13 @@ setSuggestedRes(result.slice(0,5));
         setSearch(true);
         }}
          onChange={(e)=>handleChange(e.target.value)}
-          placeholder='Search'
-          value={inputval}
+          placeholder={inputval.length===0?'Search':{inputval}}
+          
            className='w-[300px] border-2 px-4 py-[10px] rounded-md border-[#C5C5C5] bg-[#C5C5C5]'/>
            
-           {inputval.length>0&&suggestedRes.map((x)=>{
+           {inputval.length>0&&!hideSuggest&&suggestedRes.map((x)=>{
             return(
-              <div onClick={(e)=>handleSearched(e.target.innerText)}  className={`${hideSuggest&&'hidden'} w-[300px] truncate overflow-hidden whitespace-nowrap border-2 px-4 py-[10px] rounded-md border-b-[#393939] border-[#C5C5C5] bg-[#C5C5C5]`}>
+              <div onClick={(e)=>handleSearched(e.target.innerText)}  className={` w-[300px] truncate overflow-hidden whitespace-nowrap border-2 px-4 py-[10px] rounded-md border-b-[#393939] border-[#C5C5C5] bg-[#C5C5C5]`}>
                 <span>
                 {x.name}
                 </span>
