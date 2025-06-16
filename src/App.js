@@ -1,25 +1,33 @@
 import t1 from '../src/images/t1.svg'
 import cart from '../src/images/cart.svg'
+import loader from '../src/images/loading.png';
 import data from '../src/data.json'
 import { useEffect, useState } from 'react'
+
 
 export default function App() {
   
 
   const[selected,setSelected] = useState('NIKE');
+  const[finalselected,setFinalSelected] = useState('NIKE');
   const[inputval,setInputVal] = useState('');
   const[searchedRes,setSearchedRes] = useState([]);
   const[suggestedRes,setSuggestedRes] = useState([]);
   const[search,setSearch] = useState(false);
   const[hideSuggest,setHideSuggest]=useState(false);
-
+  const[showloader,setshowloader] = useState(false);
   const Brands = ['NIKE','Vans','ADIDAS','HUSHPUPPIES']
  
 
   const handleSelected = (value) =>{
 
-    console.log(value);
+         setshowloader(true);
          setSelected(value==='HUSHP'?'HUSHPUPPIES':value);
+         setTimeout(() => {
+          setFinalSelected(value==='HUSHP'?'HUSHPUPPIES':value)
+           setshowloader(false);
+         }, 2000);
+        
     
   }
   
@@ -45,7 +53,7 @@ useEffect(()=>{
   }
 },[inputval,hideSuggest])
 
-// eslint-disable-next-line react-hooks/exhaustive-deps
+// autosuggestion
 useEffect(()=>{
 
   let result =  Object.values(data).filter((x)=>
@@ -71,14 +79,16 @@ setSuggestedRes(result.slice(0,5));
   },[inputval,hideSuggest,search])
 
 
-console.log(suggestedRes,"ARRAYSUGGEST");
+
 
   const handleSearched = (name) =>{
-  
+  //autosuggestion
     setHideSuggest(true);
     setInputVal(name.toLocaleLowerCase())
     setSearch(true)
   }
+
+
  
 
   return (
@@ -113,7 +123,7 @@ console.log(suggestedRes,"ARRAYSUGGEST");
           placeholder={inputval.length===0?'Search':{inputval}}
           
            className='w-[300px] border-2 px-4 py-[10px] rounded-md border-[#C5C5C5] bg-[#C5C5C5]'/>
-           
+          {/* autosuggestion */}
            {inputval.length>0&&!hideSuggest&&suggestedRes.map((x)=>{
             return(
               <div onClick={(e)=>handleSearched(e.target.innerText)}  className={` w-[300px] truncate overflow-hidden whitespace-nowrap border-2 px-4 py-[10px] rounded-md border-b-[#393939] border-[#C5C5C5] bg-[#C5C5C5]`}>
@@ -199,13 +209,22 @@ console.log(suggestedRes,"ARRAYSUGGEST");
          <section className='w-full flex justify-center items-center mt-12'> <span className='text-[#FF0000] text-2xl '>No Products Found</span></section>
                 
          :
+
+         <section>
+             {showloader?
+             <div className='w-full  flex justify-center items-center'>
+              <img className='w-24 h-24' alt='loader' src={loader}/>
+             </div>
+        :
       <section className='mt-4 ml-6 grid grid-cols-2 gap-4 overflow-y-auto'>
 
       {Object.values(data).map((value)=>{
         
-  if(value.brand===selected){
+  if(value.brand===finalselected){
     return(
-      <section>
+   
+     
+        <section>
       <div className='w-[157px] h-[157px] bg-[#FFFFFF] rounded-md flex justify-center items-center shrink-0'>
       <img alt='value' className='w-[137px] h-[75px] object-cover'  src={value.imageURL}/>
     </div>
@@ -220,6 +239,7 @@ console.log(suggestedRes,"ARRAYSUGGEST");
         </span>
     </div>
     </section>
+  
     )
   }
   return null;
@@ -227,6 +247,9 @@ console.log(suggestedRes,"ARRAYSUGGEST");
  })
 }
       </section>
+}
+      </section>
+      
 }
       </section>
    
