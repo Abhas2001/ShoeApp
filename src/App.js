@@ -183,7 +183,7 @@ setSuggestedRes(result.slice(0,5));
         {inputval.length>0&&search?
 
         searchedRes.length>0?
-         <section className='mt-4 ml-6 flex gap-4 overflow-x-auto'>
+         <section className='mt-4 ml-6 flex gap-6 overflow-x-auto'>
                  {searchedRes.map((value)=>{
                   return(
                     <section>
@@ -217,7 +217,7 @@ setSuggestedRes(result.slice(0,5));
               <img className='w-24 h-24' alt='loader' src={loader}/>
              </div>
         :
-      <section className='mt-4 ml-6 flex gap-4 overflow-x-auto '>
+      <section className='mt-4 ml-6 flex gap-6 overflow-x-auto '>
 
       {Object.values(data).map((value)=>{
         
