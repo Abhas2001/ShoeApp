@@ -1,6 +1,6 @@
 import t1 from '../src/images/t1.svg'
 import cart from '../src/images/cart.svg'
-import loader from '../src/images/loading.png';
+
 import data from '../src/data.json'
 import { useEffect, useState } from 'react'
 
@@ -16,12 +16,16 @@ export default function App() {
   const[search,setSearch] = useState(false);
   const[hideSuggest,setHideSuggest]=useState(false);
   const[showloader,setshowloader] = useState(false);
+  const[bestShoe,setBestShoe] = useState('');
+  const[bestshoeprice,setBestshoeprice] = useState();
+  const[bestshoeimage,setBestshoeimage] = useState();
   const Brands = ['NIKE','Vans','ADIDAS','HUSHPUPPIES']
  
 
   const handleSelected = (value) =>{
 
          setshowloader(true);
+         console.log(showloader);
          setSelected(value==='HUSHP'?'HUSHPUPPIES':value);
          setTimeout(() => {
           setFinalSelected(value==='HUSHP'?'HUSHPUPPIES':value)
@@ -36,13 +40,6 @@ export default function App() {
     setInputVal(x)
   }
 
-  // useEffect(()=>{
-
-  //   console.log(hideSuggest,"HIDEEE");
-  //   if(hideSuggest){
-  //     setHideSuggest(false);
-  //    }
-  // },[hideSuggest])
 useEffect(()=>{
   if(hideSuggest){
    setSuggestedRes([])
@@ -52,6 +49,24 @@ useEffect(()=>{
   setSearch(false)
   }
 },[inputval,hideSuggest])
+
+useEffect(()=>{
+  setshowloader(true)
+   let shoeselected = Object.values(data).filter((x)=>
+    x.brand ===  selected
+   )
+   
+   let bestshoeName = shoeselected.filter((x)=>x.featured===1);
+ setTimeout(() => {
+  setBestShoe(bestshoeName[0]?.name);
+  setBestshoeprice(bestshoeName[0]?.price)
+  setBestshoeimage(bestshoeName[0]?.imageURL)
+  setshowloader(false);
+ }, 2000);
+  
+
+
+},[selected])
 
 // autosuggestion
 useEffect(()=>{
@@ -214,11 +229,12 @@ setSuggestedRes(result);
          :
 
          <section>
-             {showloader?
-             <div className='w-full  flex justify-center items-center'>
-              <img className='w-24 h-24' alt='loader' src={loader}/>
-             </div>
-        :
+             { !showloader&&
+            //  showloader?
+            //  <div className='w-full  flex justify-center items-center'>
+            //   {/* <img className='w-24 h-24' alt='loader' src={loader}/> */}
+            //  </div>
+        
       <section className='mt-4 ml-6 flex gap-6 overflow-x-auto '>
 
       {Object.values(data).map((value)=>{
@@ -259,7 +275,7 @@ setSuggestedRes(result);
 }
       </section>
 
-      <section className={`ml-6 w-full flex gap-[130px] items-center ${inputval.length>0&&search&&'hidden'}`}>
+      <section className={`ml-6 mt-6 w-full flex gap-[130px] items-center ${inputval.length>0&&search&&'hidden'}`}>
         <span className='text-[25px] font-bold text-[#000000]'>
          New Arrivals
         </span>
@@ -269,20 +285,21 @@ setSuggestedRes(result);
         </button>
       </section>
          
-
-         <section className='ml-5' >
-         <div className='w-[345px] h-[201px] bg-[#ffffff] border-[#fff] rounded-tl-2xl rounded-br-2xl flex gap-4 justify-center items-center shrink-0 shadow-lg '>
+           { !showloader&&
+         <section className='ml-5 mt-3' >
+         <div className='w-[375px] h-[171px] bg-[#f5f5f5] border-[#fff]  rounded-2xl flex gap-[50px] justify-center items-center shrink-0 shadow-lg px-5 '>
            <div className='flex flex-col'>
-            <span>Best Choice</span>
-            <span>Nike</span>
-            <span className='mt-2'>$130</span>
+            <span className='text-[#5BA5E1] font-medium'>Best Choice</span>
+            <span className='text-[#1A2530] font-medium text-[20px] text-nowrap'>{bestShoe}</span>
+            <span className='mt-2 text-[#1A2230] font-medium text-[16px]'>{`$${bestshoeprice}`}</span>
            </div>
            <div>
-            <img alt='text' className='w-[137px] h-[75px] object-cover' src="https://static.nike.com/a/images/c_limit,w_592,f_auto/t_product_v1/i1-665455a5-45de-40fb-945f-c1852b82400d/react-infinity-run-flyknit-mens-running-shoe-zX42Nc.jpg" />
+            <img alt='text' className='w-[137px] h-[75px] shadow-2xl  object-cover' src={bestshoeimage} />
            </div>
           </div>
 
          </section>
+}
 
   
 
