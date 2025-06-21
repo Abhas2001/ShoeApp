@@ -22,6 +22,8 @@ export default function App() {
   const Brands = ['NIKE','Vans','ADIDAS','HUSHPUPPIES']
  
 
+  console.log(search);
+
   const handleSelected = (value) =>{
 
          setshowloader(true);
@@ -130,9 +132,12 @@ setSuggestedRes(result);
 
       <section className='ml-6 mt-4'>
         <input    onKeyDown={(e) => {
-        if (e.key === "Enter")
+        if (e.key === "Enter"){
+
+        setHideSuggest(false);
        
         setSearch(true);
+        }
         }}
          onChange={(e)=>handleChange(e.target.value)}
           placeholder={inputval.length===0?'Looking for Shoes':{inputval}}
@@ -204,7 +209,7 @@ setSuggestedRes(result);
                  {searchedRes.map((value)=>{
                   return(
                     <section>
-                    <div className='w-[157px] h-[157px] bg-[#FFFFFF] rounded-md flex justify-center items-center shrink-0'>
+                    <div className='w-[157px] h-[157px] bg-[#f5f5f5] rounded-md flex justify-center items-center shrink-0'>
                     <img alt='value' className='w-[137px] h-[75px] object-cover'  src={value.imageURL}/>
                   </div>
               
@@ -285,7 +290,7 @@ setSuggestedRes(result);
         </button>
       </section>
          
-           { !showloader&&
+           { !showloader&& !search &&
          <section className='ml-5 mt-3' >
          <div className='w-[375px] h-[171px] bg-[#f5f5f5] border-[#fff]  rounded-2xl flex gap-[50px] justify-center items-center shrink-0 shadow-lg px-5 '>
            <div className='flex flex-col'>
