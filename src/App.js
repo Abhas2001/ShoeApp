@@ -126,7 +126,7 @@ setSuggestedRes(result);
            className='w-[355px] border-2 px-4 py-[15px] rounded-3xl border-[#C5C5C5] bg-[#FFFFFF]'/>
           {/* autosuggestion */}
 
-        <section className='h-[150px] overflow-y-auto'>
+        <section className={`${suggestedRes.length>0&&inputval.length>0?'h-[150px] overflow-y-auto':'h-[0px]'}`}>
            {inputval.length>0&&!hideSuggest&&suggestedRes.map((x)=>{
             return(
               <div onClick={(e)=>handleSearched(e.target.innerText)}  className={` w-[355px] truncate overflow-hidden whitespace-nowrap border-2 px-4 py-[10px] rounded-md  bg-[#ffffff]`}>
