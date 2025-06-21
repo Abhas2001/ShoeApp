@@ -68,7 +68,7 @@ if(search&&inputval.length>0){
 }
 
  if(inputval.length>0&&!hideSuggest){
-setSuggestedRes(result.slice(0,5));
+setSuggestedRes(result);
  }
  
  if(inputval.length===0){
@@ -125,9 +125,11 @@ setSuggestedRes(result.slice(0,5));
           
            className='w-[355px] border-2 px-4 py-[15px] rounded-3xl border-[#C5C5C5] bg-[#FFFFFF]'/>
           {/* autosuggestion */}
+
+        <section className='h-[150px] overflow-y-auto'>
            {inputval.length>0&&!hideSuggest&&suggestedRes.map((x)=>{
             return(
-              <div onClick={(e)=>handleSearched(e.target.innerText)}  className={` w-[300px] truncate overflow-hidden whitespace-nowrap border-2 px-4 py-[10px] rounded-md border-b-[#393939] border-[#C5C5C5] bg-[#C5C5C5]`}>
+              <div onClick={(e)=>handleSearched(e.target.innerText)}  className={` w-[355px] truncate overflow-hidden whitespace-nowrap border-2 px-4 py-[10px] rounded-md  bg-[#ffffff]`}>
                 <span>
                 {x.name}
                 </span>
@@ -139,7 +141,7 @@ setSuggestedRes(result.slice(0,5));
           
          
 }
-
+</section>
       </section>
  
 
