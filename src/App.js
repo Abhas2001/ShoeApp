@@ -1,7 +1,7 @@
 import t1 from '../src/images/t1.svg'
 import cart from '../src/images/cart.svg'
 import wishlist from '../src/images/wishlist.svg'
-
+import wishlisted from '../src/images/wishlisted.webp'
 import data from '../src/data.json'
 import { useEffect, useState } from 'react'
 
@@ -108,12 +108,27 @@ setSuggestedRes(result);
 
 
  const handlewishlist = (value) =>{
-       
+  console.log(value);
+  console.log(wishlistarr.indexOf(value));
+  let indextoremove = wishlistarr.indexOf(value)
+       if(wishlistarr.indexOf(value)!==-1){
+        console.log(indextoremove,"running");
+        let newarr =  wishlistarr.filter((x)=>{
+          return(
+            x!==value
+          )
+          })
+      
+     setwishlistarr(newarr);
+       }
+       else{
   setwishlistarr((prev)=>[...prev,value])
+       }
               
-  
+   
  } 
- console.log(wishlistarr)
+
+//  console.log(wishlistarr);
 
   return (
 
@@ -265,8 +280,12 @@ setSuggestedRes(result);
    <div className='flex'>
     
       <img alt='value' className='w-[137px] h-[75px] object-cover'  src={value.imageURL}/>
-      <div onClick={() => handlewishlist(value.name)} className='relative top-[-20px]'>
+      <div onClick={() => handlewishlist(value.name)} className='relative top-[-20px] rounded-full object-cover'>
+        { wishlistarr.includes(value.name)?
+      <img alt='wishlisted' className='w-8 h-8 object-fill rounded-full' src={wishlisted}/>
+      :
                         <img alt='wishlist' className='w-8 h-8' src={wishlist}/>
+        }
                       </div>
     
       </div>
