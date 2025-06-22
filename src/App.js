@@ -141,7 +141,7 @@ setSuggestedRes(result);
 
       
         }}
-         onChange={(e)=>handleChange(e.target.value)}
+         onChange={(e)=>handleChange(e.target.value.trimStart())}
           placeholder={inputval.length===0?'Looking for Shoes':{inputval}}
           value={inputval}
           
