@@ -1,5 +1,6 @@
 import t1 from '../src/images/t1.svg'
 import cart from '../src/images/cart.svg'
+import wishlist from '../src/images/wishlist.svg'
 
 import data from '../src/data.json'
 import { useEffect, useState } from 'react'
@@ -19,6 +20,7 @@ export default function App() {
   const[bestShoe,setBestShoe] = useState('');
   const[bestshoeprice,setBestshoeprice] = useState();
   const[bestshoeimage,setBestshoeimage] = useState();
+  const[wishlistarr,setwishlistarr] = useState([])
   const Brands = ['NIKE','Vans','ADIDAS','HUSHPUPPIES']
  
 
@@ -105,8 +107,13 @@ setSuggestedRes(result);
   }
 
 
+ const handlewishlist = (value) =>{
+       
+  setwishlistarr((prev)=>[...prev,value])
+              
   
- 
+ } 
+ console.log(wishlistarr)
 
   return (
 
@@ -212,6 +219,9 @@ setSuggestedRes(result);
                   return(
                     <section>
                     <div className='w-[157px] h-[157px] bg-[#f5f5f5] rounded-md flex justify-center items-center shrink-0'>
+                      <button onClick={handlewishlist(value.name)}>
+                        <img alt='wishlist' className='w-8 h-8' src={wishlist}/>
+                      </button>
                     <img alt='value' className='w-[137px] h-[75px] object-cover'  src={value.imageURL}/>
                   </div>
               
@@ -252,9 +262,14 @@ setSuggestedRes(result);
      
         <section >
       <div className='w-[157px] h-[201px] bg-[#f5f5f5] border-[#fff] rounded-tl-2xl rounded-br-2xl flex flex-col justify-center items-center shrink-0 shadow-lg '>
-      <img alt='value' className='w-[137px] h-[75px] object-cover'  src={value.imageURL}/>
+   <div className='flex'>
     
-
+      <img alt='value' className='w-[137px] h-[75px] object-cover'  src={value.imageURL}/>
+      <div onClick={() => handlewishlist(value.name)} className='relative top-[-20px]'>
+                        <img alt='wishlist' className='w-8 h-8' src={wishlist}/>
+                      </div>
+    
+      </div>
     <div className='mt-6 flex flex-col gap-1'>
       <div className='w-[137px] truncate overflow-hidden whitespace-nowrap '>
         <span  className='text-[16px] font-bold'>
