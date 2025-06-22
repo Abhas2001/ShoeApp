@@ -1,9 +1,17 @@
 import t1 from '../src/images/t1.svg'
 import cart from '../src/images/cart.svg'
-import wishlist from '../src/images/wishlist.svg'
-import wishlisted from '../src/images/wishlisted.webp'
+
 import data from '../src/data.json'
+
 import { useEffect, useState } from 'react'
+import Brand from './Brand/Brand'
+
+import { createContext, useContext } from 'react';
+import Popular from './Popular/Popular'
+
+export const BrandContext = createContext();
+
+export const useBrand = () => useContext(BrandContext);
 
 
 export default function App() {
@@ -21,7 +29,10 @@ export default function App() {
   const[bestshoeprice,setBestshoeprice] = useState();
   const[bestshoeimage,setBestshoeimage] = useState();
   const[wishlistarr,setwishlistarr] = useState([])
-  const Brands = ['NIKE','Vans','ADIDAS','HUSHPUPPIES']
+
+
+
+  
  
 
   console.log(search);
@@ -188,133 +199,22 @@ setSuggestedRes(result);
 </section>
       </section>
  
-
-      <section className={`mt-4 ml-6 w-full flex gap-40 items-center ${inputval.length>0&&'hidden'} `}>
-        <span className='text-[20px] font-extrabold text-[#000000]'>
-          Select Brand
-        </span>
-
-        <button className='text-[#828282]'>
-          View all
-        </button>
-      </section>
-
-      <section className={`ml-6 mt-2 flex gap-4 shrink-0 overflow-x-auto ${inputval.length>0&&'hidden'} `}>
-        {Brands.map((x)=>{
-          return (
-            <div onClick={(e)=>handleSelected(e.target.innerText)} className={` w-[130px] h-[50px] rounded-lg border-2 border-[#fff] ${selected===x?'bg-[#292929]':'bg-[#ffffff]'} flex justify-center items-center shrink-0`}>
-            <span  className={`font-bold text-[20px] ${selected===x?'text-[#ffffff]':'text-[#9B9B9B]'}`}>
-
-               {x==='HUSHPUPPIES'?'HUSHP':x}
-            </span>
-         </div>
-          )
-        })
-    
-}
-      </section>
-
-      <section className={`mt-4 ml-6 w-full flex gap-[115px] items-center ${inputval.length>0&&search&&'hidden'}`}>
-        <span className='text-[25px] font-bold text-[#000000]'>
-          Popular Shoes
-        </span>
-
-        <button className='text-[#828282]'>
-          View all
-        </button>
-      </section>
-
-
-       <section>
-        {inputval.length>0&&search?
-
-        searchedRes.length>0?
-         <section className='mt-4 ml-6 flex gap-6 overflow-x-auto'>
-                 {searchedRes.map((value)=>{
-                  return(
-                    <section>
-                    <div className='w-[157px] h-[157px] bg-[#f5f5f5] rounded-md flex justify-center items-center shrink-0'>
-                      <button onClick={handlewishlist(value.name)}>
-                        <img alt='wishlist' className='w-8 h-8' src={wishlist}/>
-                      </button>
-                    <img alt='value' className='w-[137px] h-[75px] object-cover'  src={value.imageURL}/>
-                  </div>
-              
-                  <div>
-                      <span className='text-[16px] font-medium'>
-                        {value.name}
-                      </span>
-                      <br/>
-                      <span className='font-bold text-[18px]'>
-                        {`$ ${value.price}`}
-                      </span>
-                  </div>
-                  </section>
-                  )
-                 })
-
-                 }
-         </section>
-         :
-         <section className='w-full flex justify-center items-center mt-12'> <span className='text-[#FF0000] text-2xl '>No Products Found</span></section>
-                
-         :
-
-         <section>
-             { !showloader&&
-            //  showloader?
-            //  <div className='w-full  flex justify-center items-center'>
-            //   {/* <img className='w-24 h-24' alt='loader' src={loader}/> */}
-            //  </div>
-        
-      <section className='mt-4 ml-6 flex gap-6 overflow-x-auto '>
-
-      {Object.values(data).map((value)=>{
-        
-  if(value.brand===finalselected){
-    return(
-   
-     
-        <section >
-      <div className='w-[157px] h-[201px] bg-[#f5f5f5] border-[#fff] rounded-tl-2xl rounded-br-2xl flex flex-col justify-center items-center shrink-0 shadow-lg '>
-   <div className='flex'>
-    
-      <img alt='value' className='w-[137px] h-[75px] object-cover'  src={value.imageURL}/>
-      <div onClick={() => handlewishlist(value.name)} className='relative top-[-20px] rounded-full object-cover'>
-        { wishlistarr.includes(value.name)?
-      <img alt='wishlisted' className='w-8 h-8 object-fill rounded-full' src={wishlisted}/>
-      :
-                        <img alt='wishlist' className='w-8 h-8' src={wishlist}/>
-        }
-                      </div>
-    
-      </div>
-    <div className='mt-6 flex flex-col gap-1'>
-      <div className='w-[137px] truncate overflow-hidden whitespace-nowrap '>
-        <span  className='text-[16px] font-bold'>
-          {value.name}
-        </span>
-        </div>
-        
-        <span className='font-medium text-[16px] text-[#FF0000]'>
-          {`$ ${value.price}`}
-        </span>
-    </div>
-    </div>
-    </section>
-  
-    )
-  }
-  return null;
-
- })
-}
-      </section>
-}
-      </section>
-      
-}
-      </section>
+      <BrandContext.Provider
+  value={{
+    inputval,
+    selected,
+    handleSelected,
+    handlewishlist,
+    search,
+    searchedRes,
+    showloader,
+    finalselected,
+    wishlistarr
+  }}
+>
+  <Brand />
+  <Popular />
+</BrandContext.Provider>
 
       <section className={`ml-6 mt-6 w-full flex gap-[130px] items-center ${inputval.length>0&&search&&'hidden'}`}>
         <span className='text-[25px] font-bold text-[#000000]'>
