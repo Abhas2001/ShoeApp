@@ -74,7 +74,7 @@ useEffect(()=>{
 useEffect(()=>{
 
   let result =  Object.values(data).filter((x)=>
-  x.name.toLocaleLowerCase().includes(inputval)
+  x.name.toLocaleLowerCase().includes(inputval.toLocaleLowerCase())
 )
   
 if(search&&inputval.length>0){
@@ -96,7 +96,6 @@ setSuggestedRes(result);
   },[inputval,hideSuggest,search])
 
 
-console.log(hideSuggest,"checkakr");
 
   const handleSearched = (name) =>{
   //autosuggestion
@@ -106,6 +105,7 @@ console.log(hideSuggest,"checkakr");
   }
 
 
+  
  
 
   return (
@@ -138,6 +138,8 @@ console.log(hideSuggest,"checkakr");
        
         setSearch(true);
         }
+
+      
         }}
          onChange={(e)=>handleChange(e.target.value)}
           placeholder={inputval.length===0?'Looking for Shoes':{inputval}}
