@@ -96,7 +96,7 @@ setSuggestedRes(result);
   },[inputval,hideSuggest,search])
 
 
-
+console.log(hideSuggest,"checkakr");
 
   const handleSearched = (name) =>{
   //autosuggestion
@@ -134,7 +134,7 @@ setSuggestedRes(result);
         <input    onKeyDown={(e) => {
         if (e.key === "Enter"){
 
-        setHideSuggest(false);
+        setHideSuggest(true);
        
         setSearch(true);
         }
