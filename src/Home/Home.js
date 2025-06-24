@@ -16,6 +16,23 @@ export const useBrand = () => useContext(BrandContext);
 
 export default function App() {
   
+  const[count,setCount] = useState(0);
+
+  function abcd(){
+    return 30;
+  }
+
+  function badUpdate(){
+    setCount(count+1);
+    setCount(count+1);
+    setCount(prev=>prev+1);
+  }
+
+  useEffect(()=>{
+    badUpdate();
+    console.log(count,"count");
+  },[])
+  console.log(count,"count");
 
   const[selected,setSelected] = useState('NIKE');
   const[finalselected,setFinalSelected] = useState('NIKE');
