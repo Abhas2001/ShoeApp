@@ -1,5 +1,5 @@
 import React from 'react'
-import { useBrand } from '../App'
+import { useBrand } from '../Home/Home'
 
 const Brands = ['NIKE','Vans','ADIDAS','HUSHPUPPIES']
 

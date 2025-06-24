@@ -1,5 +1,5 @@
 import React from 'react'
-import { useBrand } from '../App'
+import { useBrand } from '../Home/Home'
 import data from'../../src/data.json';
 import wishlist from '../../src/images/wishlist.svg'
 import wishlisted from '../../src/images/wishlisted.webp'
