@@ -1,6 +1,8 @@
 import t1 from '../src/images/t1.svg'
 import cart from '../src/images/cart.svg'
-
+import centercart from '../src/images/centercart.svg'
+import home from '../src/images/home.svg'
+import heart from '../src/images/heart.svg'
 import data from '../src/data.json'
 
 import { useEffect, useState } from 'react'
@@ -245,7 +247,18 @@ setSuggestedRes(result);
   
 
 
-    
+    <section className='w-full  h-12 bg-[#ffffff] flex justify-evenly items-center fixed bottom-0 p-4'>
+      <div>
+        <img alt='home' src={home}/>
+      </div>
+      <div>
+      <img alt='cart' src={centercart}/>
+      </div>
+      <div>
+      <img alt='heart' src={heart}/>
+      </div>
+
+    </section>
 
 
   
