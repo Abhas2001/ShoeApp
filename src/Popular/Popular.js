@@ -4,6 +4,11 @@ import data from'../../src/data.json';
 import wishlist from '../../src/images/wishlist.svg'
 import wishlisted from '../../src/images/wishlisted.webp'
 
+import addcart from '../../src/images/addcart.svg';
+
+
+import plus from '../../src/images/plus.svg';
+
 
 const Popular = () => {
 
@@ -76,11 +81,11 @@ const Popular = () => {
    <div className='flex'>
     
       <img alt='value' className='w-[137px] h-[75px] object-cover'  src={value.imageURL}/>
-      <div onClick={() => handlewishlist(value.name)} className='relative top-[-20px] rounded-full object-cover'>
+      <div onClick={() => handlewishlist(value.name)} className='relative top-[-8px] rounded-full object-cover'>
         { wishlistarr.includes(value.name)?
-      <img alt='wishlisted' className='w-8 h-8 object-fill rounded-full' src={wishlisted}/>
+      <img alt='wishlisted' className='w-10 h-10 object-fill rounded-full' src={wishlisted}/>
       :
-                        <img alt='wishlist' className='w-8 h-8' src={wishlist}/>
+                        <img alt='wishlist' className='w-10 h-10' src={wishlist}/>
         }
                       </div>
     
@@ -95,7 +100,15 @@ const Popular = () => {
         <span className='font-medium text-[16px] text-[#FF0000]'>
           {`$ ${value.price}`}
         </span>
+        
     </div>
+    <div className='w-full flex justify-end relative top-[14px]'>
+    <span>
+          <img alt='cart'  src={addcart}/>
+          <img alt='cart' className='relative top-[-24px] left-[10px]' src={plus}/>
+        </span>
+
+        </div>
     </div>
     </section>
   
