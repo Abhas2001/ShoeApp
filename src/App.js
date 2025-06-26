@@ -12,9 +12,10 @@ export const userContext = createContext();
 const App = () => {
 
   const[cartid,setCarrtid] = useState([])
+  const[count,setcount] = useState(1);
 console.log(cartid);
   return (
-    <userContext.Provider value={{cartid,setCarrtid}}>
+    <userContext.Provider value={{cartid,setCarrtid,setcount,count}}>
     <BrowserRouter>
     <Routes>
       <Route path='/' element={<Home/>}/>

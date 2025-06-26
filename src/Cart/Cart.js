@@ -1,16 +1,18 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import {useNavigate } from 'react-router-dom';
 import { userContext } from '../App';
 import Fixedft from '../Fixedft/Fixedft'
 import data from '../data.json'
 import back from '../images/back.svg';
+import deletes from '../images/delete.png';
+import plus from '../../src/images/plus.svg';
 
 const Cart = () => {
 
   const navigate = useNavigate()
-  const {cartid} = useContext(userContext);
+  const[shoename,setshoename] = useState()
+  const {cartid,count,setcount} = useContext(userContext);
 
-  console.log(cartid);
 
  
  
@@ -25,7 +27,11 @@ let arr = Object.values(data).filter((x)=>{
 })
 
 
-console.log(arr); 
+const handleadd = (name) =>{
+  setshoename(name)
+   setcount(count + 1)
+}
+
   return (
     <div className='w-full h-screen flex flex-col bg-[#F8F9FA]'>
 
@@ -54,26 +60,26 @@ console.log(arr);
           <div className='flex flex-col'>
             <span className='font-bold text-[16px]'>{x.name}</span>
             <span className='font-semibold text-[14px] mt-[4px]'>{x.price}</span>
-            <div className='flex gap-3'>
-            <button>
+            <div className='flex gap-3 mt-[3px]'>
+            <button  className='w-6 h-6 flex justify-center items-center text-[#828A89] font-extrabold bg-[#fff] rounded-full'>
                   -
             </button>
 
             <span>
-              1
+              {shoename===x.name?count:1}
             </span>
 
-            <button>
-              +
+            <button onClick={()=>handleadd(x.name)} className='w-6 h-6 flex justify-center items-center  text-white font-extrabold bg-[#5B9EE1] rounded-full'>
+              <img alt='plus' src={plus}/>
             </button>
             </div>
           </div>
         </section>
 
-        <section className='flex flex-col gap-4'>
+        <section className='flex flex-col justify-center items-center gap-4'>
           <div className='font-bold text-[14px]'>L</div>
           <div>
-            delete
+            <img alt='delete' src={deletes}/>
           </div>
         </section>
       </section>

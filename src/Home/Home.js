@@ -8,6 +8,7 @@ import Brand from '../Brand/Brand'
 
 import { createContext, useContext } from 'react';
 import Popular from '../Popular/Popular'
+import { useNavigate } from 'react-router-dom'
 import { userContext } from '../App'
 
 export const BrandContext = createContext();
@@ -34,15 +35,12 @@ export default function App() {
   const[bestshoeprice,setBestshoeprice] = useState();
   const[bestshoeimage,setBestshoeimage] = useState();
   const[wishlistarr,setwishlistarr] = useState([])
+  const navigate = useNavigate();
 
+  const {cartid} = useContext(userContext)
 
-const {cartid} = useContext(userContext)
+  console.log(cartid.length);
 
-
-console.log(cartid);
-  
-
-  console.log(search);
 
   const handleSelected = (value) =>{
 
@@ -55,6 +53,10 @@ console.log(cartid);
          }, 2000);
         
     
+  }
+
+  const handlecart = () =>{
+    navigate("/cart")
   }
   
 
@@ -155,8 +157,13 @@ setSuggestedRes(result);
       <img alt='banner' src={t1}/>
       <span className="font-schoolbell text-lg">SNEAKER2SR</span>
 
-      <span className='mr-1'>
-        <img alt='cart' src={cart}/>
+      <span className='mr-1' onClick={handlecart}>
+
+      
+        <img  alt='cart' src={cart}/>
+        <div className={`${cartid.length>0?'transform transition-transform duration-500 ease-in-out':'hidden'} w-2 h-2 bg-red-500 rounded-full relative bottom-14 left-14`}>
+
+</div>
       </span>
 
       </section>
