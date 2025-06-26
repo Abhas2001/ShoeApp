@@ -1,31 +1,29 @@
-import React, { useState } from 'react'
+import React from 'react'
 import Fixedft from '../Fixedft/Fixedft'
+import back from '../images/back.svg';
 
 const Cart = () => {
 
-  const[userdetails,setuserdetails] = useState({name:"",email:"",age:""})
 
-
-  function handlechange (key,val) {
-
-    console.log(val);
- setuserdetails(prev =>({...prev,[key]:val}))
-
- /*key is a variable
-
-[key] tells JavaScript:
-
-“Use the value inside this variable as the key.”*/
-  }
-  console.log(userdetails);
 
 
   return (
-    <div className='w-full h-screen flex flex-col gap-2 justify-center items-center'>
+    <div className='w-full h-screen flex flex-col bg-[#F8F9FA]'>
 
-     <input onChange={(e)=>handlechange("name",e.target.value)} className="border-2 border-black px-12 py-2"/>
-     <input onChange={(e)=>handlechange("email",e.target.value)} className="border-2 border-black px-12 py-2"/>
-     <input onChange={(e)=>handlechange("age",e.target.value)} className="border-2 border-black px-12 py-2"/>
+      <div className='w-full flex justify-between mt-4'>
+        <span className='bg-[#ffffff] rounded-full'>
+          <img src={back} alt='back'/>
+        </span>
+          <span className='text-[#1A2530] font font-bold text-[16px]'>
+            My Cart
+        </span>
+
+        <span>
+
+        </span>
+      </div>
+
+     <Fixedft/>
      
 
  
