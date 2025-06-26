@@ -35,6 +35,7 @@ export default function App() {
   const[bestshoeprice,setBestshoeprice] = useState();
   const[bestshoeimage,setBestshoeimage] = useState();
   const[wishlistarr,setwishlistarr] = useState([])
+ 
   const navigate = useNavigate();
 
   const {cartid} = useContext(userContext)
@@ -74,21 +75,17 @@ useEffect(()=>{
   }
 },[inputval,hideSuggest])
 
+
+
 useEffect(()=>{
   setshowloader(true)
-   let shoeselected = Object.values(data).filter((x)=>
-    x.brand ===  selected
-   )
-   
-   let bestshoeName = shoeselected.filter((x)=>x.featured===1);
- setTimeout(() => {
+  let shoeselected = Object.values(data).filter((x)=>
+  x.brand ===  selected
+ )
+  let bestshoeName = shoeselected.filter((x)=>x.featured===1);
   setBestShoe(bestshoeName[0]?.name);
   setBestshoeprice(bestshoeName[0]?.price)
   setBestshoeimage(bestshoeName[0]?.imageURL)
-  setshowloader(false);
- }, 2000);
-  
-
 
 },[selected])
 
@@ -128,8 +125,6 @@ setSuggestedRes(result);
 
 
  const handlewishlist = (value) =>{
-  console.log(value);
-  console.log(wishlistarr.indexOf(value));
   let indextoremove = wishlistarr.indexOf(value)
        if(wishlistarr.indexOf(value)!==-1){
         console.log(indextoremove,"running");
