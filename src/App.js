@@ -1,5 +1,5 @@
 import React from 'react'
-import Cart from './Cart/Cart'
+import Cart from '../src/Cart/Cart'
 import Home from '../src/Home/Home'
 
 import { BrowserRouter } from 'react-router-dom'
