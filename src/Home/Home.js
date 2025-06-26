@@ -8,6 +8,7 @@ import Brand from '../Brand/Brand'
 
 import { createContext, useContext } from 'react';
 import Popular from '../Popular/Popular'
+import { userContext } from '../App'
 
 export const BrandContext = createContext();
 
@@ -35,7 +36,10 @@ export default function App() {
   const[wishlistarr,setwishlistarr] = useState([])
 
 
+const {cartid} = useContext(userContext)
 
+
+console.log(cartid);
   
 
   console.log(search);

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { useBrand } from '../Home/Home'
 import data from'../../src/data.json';
 import wishlist from '../../src/images/wishlist.svg'
@@ -8,11 +8,24 @@ import addcart from '../../src/images/addcart.svg';
 
 
 import plus from '../../src/images/plus.svg';
+import { userContext } from '../App';
 
 
 const Popular = () => {
 
     const {inputval,search,searchedRes,handlewishlist,showloader,finalselected,wishlistarr} = useBrand()
+    const {setCarrtid} = useContext(userContext)
+
+    console.log("clicked");
+
+    const handleCarts = (name) => {
+    
+      setCarrtid((prev)=>[...prev,name]);
+
+      console.log("clicked");
+      console.log(name);
+
+    }
   return (
     <div>
              <section className={`mt-4 ml-6 w-full flex gap-[115px] items-center ${inputval.length>0&&search&&'hidden'}`}>
@@ -102,8 +115,8 @@ const Popular = () => {
         </span>
         
     </div>
-    <div className='w-full flex justify-end relative top-[14px]'>
-    <span>
+    <div onClick={()=>handleCarts(value.id)} className='w-full flex justify-end relative top-[14px]'>
+    <span >
           <img alt='cart'  src={addcart}/>
           <img alt='cart' className='relative top-[-24px] left-[10px]' src={plus}/>
         </span>
