@@ -26,6 +26,7 @@ const Popular = () => {
       console.log(name);
 
     }
+    console.log(showloader);
   return (
     <div>
              <section className={`mt-4 ml-6 w-full flex gap-[115px] items-center ${inputval.length>0&&search&&'hidden'}`}>
@@ -40,8 +41,9 @@ const Popular = () => {
 
 
        <section>
+        {console.log(searchedRes.length,"LENGTH")}
         {inputval.length>0&&search?
-
+           
         searchedRes.length>0?
          <section className='mt-4 ml-6 flex gap-6 overflow-x-auto'>
                  {searchedRes.map((value)=>{
@@ -75,17 +77,16 @@ const Popular = () => {
          :
 
          <section>
-             { !showloader&&
-            //  showloader?
-            //  <div className='w-full  flex justify-center items-center'>
-            //   {/* <img className='w-24 h-24' alt='loader' src={loader}/> */}
-            //  </div>
+    
         
       <section className='mt-4 ml-6 flex gap-6 overflow-x-auto '>
 
       {Object.values(data).map((value)=>{
         
+     
   if(value.brand===finalselected){
+
+    console.log(value,"VALUEE");
     return(
    
      
@@ -132,7 +133,7 @@ const Popular = () => {
  })
 }
       </section>
-}
+
       </section>
       
 }

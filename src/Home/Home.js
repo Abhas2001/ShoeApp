@@ -143,7 +143,7 @@ setSuggestedRes(result);
    
  } 
 
-
+console.log(showloader);
 
   return (
 
@@ -235,7 +235,7 @@ setSuggestedRes(result);
         </button>
       </section>
          
-           { !showloader&& !search &&
+           {  !search &&
          <section className='ml-5 mt-3' >
          <div className='w-[375px] h-[171px] bg-[#f5f5f5] border-[#fff]  rounded-2xl flex gap-[50px] justify-center items-center shrink-0 shadow-lg px-5 '>
            <div className='flex flex-col'>

@@ -53,8 +53,8 @@ const handleadd = (name) =>{
  
       <section className='w-full flex justify-between p-4'>
         <section className='flex gap-[16px]'>
-          <div className='flex w-[87px] h-[85px]'>
-            <img alt='product' src={x.imageURL}/>
+          <div className='flex w-[97px] h-[95px] rounded-xl shadow-md'>
+            <img className='rounded-xl' alt='product' src={x.imageURL}/>
           </div>
 
           <div className='flex flex-col'>
