@@ -11,10 +11,13 @@ const Cart = () => {
 
   const navigate = useNavigate()
   const[shoename,setshoename] = useState()
+
+  const[additionselects,setadditionselects] = useState([])
+  const[valcount,setvalcount] = useState({});
   const {cartid,count,setcount} = useContext(userContext);
 
 
- 
+ let counts = 1 ;
  
 const handleBack = () =>{
    navigate(-1)
@@ -26,11 +29,32 @@ let arr = Object.values(data).filter((x)=>{
   )
 })
 
+function handlecountofelements(varue,arr){
+  arr.map((x)=>{
+  
+     if(x === varue){
+        counts++;
+     }
 
+   
+  })
+
+  setvalcount((prevs) => ({...prevs,[varue]:counts}))
+  console.log(counts);
+
+} 
+
+console.log(valcount["Nike React Miler"]);
 const handleadd = (name) =>{
+  setadditionselects((prev)=>[...prev,name]);
   setshoename(name)
-   setcount(count + 1)
+  handlecountofelements(name,additionselects)
+
 }
+ 
+
+
+console.log(additionselects,"slectsss");
 
   return (
     <div className='w-full h-screen flex flex-col bg-[#F8F9FA]'>
@@ -59,17 +83,17 @@ const handleadd = (name) =>{
 
           <div className='flex flex-col'>
             <span className='font-bold text-[16px]'>{x.name}</span>
-            <span className='font-semibold text-[14px] mt-[4px]'>{x.price}</span>
-            <div className='flex gap-3 mt-[3px]'>
-            <button  className='w-6 h-6 flex justify-center items-center text-[#828A89] font-extrabold bg-[#fff] rounded-full'>
+            <span className='font-semibold text-[16px] mt-[6px]'>{'$'+x.price}</span>
+            <div className='flex gap-3 mt-[14px]  items-center'>
+            <button  className='w-8 h-8 flex justify-center items-center text-[#828A89] font-extrabold bg-[#fff] rounded-full'>
                   -
             </button>
 
             <span>
-              {shoename===x.name?count:1}
+              {valcount[x.name]}
             </span>
 
-            <button onClick={()=>handleadd(x.name)} className='w-6 h-6 flex justify-center items-center  text-white font-extrabold bg-[#5B9EE1] rounded-full'>
+            <button onClick={()=>handleadd(x.name)} className='w-8 h-8 flex justify-center items-center  text-white font-extrabold bg-[#5B9EE1] rounded-full'>
               <img alt='plus' src={plus}/>
             </button>
             </div>
@@ -77,7 +101,7 @@ const handleadd = (name) =>{
         </section>
 
         <section className='flex flex-col justify-center items-center gap-4'>
-          <div className='font-bold text-[14px]'>L</div>
+          <div className='font-bold text-[18px]'></div>
           <div>
             <img alt='delete' src={deletes}/>
           </div>
