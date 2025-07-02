@@ -1,4 +1,7 @@
-import React, { useContext, useState } from 'react'
+/* eslint-disable react-hooks/exhaustive-deps */
+
+
+import React, { useContext, useEffect, useState } from 'react'
 import {useNavigate } from 'react-router-dom';
 import { userContext } from '../App';
 import Fixedft from '../Fixedft/Fixedft'
@@ -13,12 +16,12 @@ const Cart = () => {
   const[shoename,setshoename] = useState()
 
   const[additionselects,setadditionselects] = useState([])
+  const[cartarr,setcartarr] = useState([]);
   const[valcount,setvalcount] = useState({});
-  const {cartid,count,setcount} = useContext(userContext);
-
+  const {cartid} = useContext(userContext);
 
  let counts = 1 ;
- 
+ console.log(shoename);
 const handleBack = () =>{
    navigate(-1)
 }
@@ -29,13 +32,20 @@ let arr = Object.values(data).filter((x)=>{
   )
 })
 
+
+// eslint-disable-next-line react-hooks/exhaustive-deps
+useEffect(() => {
+  setcartarr(arr);
+}, []);
+
+
 function handlecountofelements(varue,arr){
   arr.map((x)=>{
   
      if(x === varue){
         counts++;
      }
-
+   return counts;
    
   })
 
@@ -52,9 +62,17 @@ const handleadd = (name) =>{
 
 }
  
+const handleremovecart = (val) =>{
+  let final = arr.filter((x)=>{
+    return(
+      x.name!==val
+    )
+  })
 
+  console.log(final);
+  setcartarr(final);
+}
 
-console.log(additionselects,"slectsss");
 
   return (
     <div className='w-full h-screen flex flex-col bg-[#F8F9FA]'>
@@ -72,7 +90,7 @@ console.log(additionselects,"slectsss");
         </span>
       </div>
 <section className='mt-10'>
-  { arr.map((x)=>{return(
+  { cartarr.map((x)=>{return(
 
  
       <section className='w-full flex justify-between p-4'>
@@ -90,7 +108,7 @@ console.log(additionselects,"slectsss");
             </button>
 
             <span>
-              {valcount[x.name]}
+              {valcount[x.name]?valcount[x.name]:1}
             </span>
 
             <button onClick={()=>handleadd(x.name)} className='w-8 h-8 flex justify-center items-center  text-white font-extrabold bg-[#5B9EE1] rounded-full'>
@@ -102,7 +120,7 @@ console.log(additionselects,"slectsss");
 
         <section className='flex flex-col justify-center items-center gap-4'>
           <div className='font-bold text-[18px]'></div>
-          <div>
+          <div onClick={()=>handleremovecart(x.name)}>
             <img alt='delete' src={deletes}/>
           </div>
         </section>
