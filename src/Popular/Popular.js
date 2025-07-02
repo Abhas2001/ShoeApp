@@ -9,12 +9,14 @@ import addcart from '../../src/images/addcart.svg';
 
 import plus from '../../src/images/plus.svg';
 import { userContext } from '../App';
+import { useNavigate } from 'react-router-dom';
 
 
 const Popular = () => {
 
     const {inputval,search,searchedRes,handlewishlist,showloader,finalselected,wishlistarr} = useBrand()
-    const {setCarrtid} = useContext(userContext)
+    const {setCarrtid,setdetailedname} = useContext(userContext)
+    const navigate = useNavigate()
 
     console.log("clicked");
 
@@ -25,6 +27,11 @@ const Popular = () => {
       console.log("clicked");
       console.log(name);
 
+    }
+
+    const handledetailed = (name) =>{
+      setdetailedname(name);
+      navigate("/detailed")
     }
     console.log(showloader);
   return (
@@ -98,7 +105,7 @@ const Popular = () => {
       <div className='w-[157px] h-[201px] bg-[#f5f5f5] border-[#fff] rounded-tl-2xl rounded-br-2xl flex flex-col justify-center items-center shrink-0 shadow-lg '>
    <div className='flex'>
     
-      <img alt='value' className='w-[137px] h-[75px] object-cover'  src={value.imageURL}/>
+      <img onClick={()=>handledetailed(value.name)} alt='value' className='w-[137px] h-[75px] object-cover'  src={value.imageURL}/>
       <div onClick={() => handlewishlist(value.name)} className='relative top-[-8px] rounded-full object-cover'>
         { wishlistarr.includes(value.name)?
       <img alt='wishlisted' className='w-10 h-10 mt-2 object-fill rounded-full' src={wishlisted}/>
