@@ -7,6 +7,8 @@ import { useEffect, useState } from 'react'
 import Brand from '../Brand/Brand'
 
 import { createContext, useContext } from 'react';
+import left from '../images/close1.png';
+import close from '../images/close.png';
 import Popular from '../Popular/Popular'
 import { useNavigate } from 'react-router-dom'
 import { userContext } from '../App'
@@ -96,6 +98,7 @@ useEffect(()=>{
   x.name.toLocaleLowerCase().includes(inputval.toLocaleLowerCase())
 )
   
+console.log(result,"Result99");
 if(search&&inputval.length>0){
 
 
@@ -143,7 +146,17 @@ setSuggestedRes(result);
    
  } 
 
-console.log(showloader);
+ const handlegetback = () =>{
+  setInputVal('')
+  setSearchedRes([]);
+ }
+
+
+ const handleclearinput = () =>{
+  setInputVal('')
+
+ }
+console.log(searchedRes,"HRYLETSCHECK");
 
   return (
 
@@ -173,6 +186,10 @@ console.log(showloader);
       </section>
 
       <section className='ml-6 mt-4'>
+        <div className='flex'>
+  <span onClick={()=>handlegetback()} className={`${searchedRes.length>0?'':'hidden'}  relative left-[21px] top-[23px] cursor-pointer`}>
+       <img alt='back' src={left}/>
+       </span>
         <input    onKeyDown={(e) => {
         if (e.key === "Enter"){
 
@@ -187,7 +204,13 @@ console.log(showloader);
           placeholder={inputval.length===0?'Looking for Shoes':{inputval}}
           value={inputval}
           
-           className='w-[355px] border-2 px-4 py-[15px] rounded-3xl border-[#C5C5C5] bg-[#FFFFFF]'/>
+           className='w-[355px]  border-2 px-4 py-[15px] rounded-3xl border-[#C5C5C5] bg-[#FFFFFF] '/>
+           <span onClick={()=>handleclearinput()} className={`${inputval.length>0?'':'hidden'} relative right-6 top-5`}>
+            <img className='w-4 h-4' alt='back' src={close}/>
+            </span>
+              </div>
+
+
           {/* autosuggestion */}
 
         <section className={`${suggestedRes.length>0&&inputval.length>0?'h-[150px] overflow-y-auto':'h-[0px]'}`}>

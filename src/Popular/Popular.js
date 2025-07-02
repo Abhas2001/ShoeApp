@@ -50,9 +50,13 @@ const Popular = () => {
                   return(
                     <section>
                     <div className='w-[157px] h-[157px] bg-[#f5f5f5] rounded-md flex justify-center items-center shrink-0'>
-                      <button onClick={handlewishlist(value.name)}>
-                        <img alt='wishlist' className='w-8 h-8' src={wishlist}/>
-                      </button>
+                    <div onClick={() => handlewishlist(value.name)} className='relative top-[-60px] rounded-full object-cover'>
+        { wishlistarr.includes(value.name)?
+      <img alt='wishlisted' className='w-10 h-10 mt-2 object-fill rounded-full' src={wishlisted}/>
+      :
+                        <img alt='wishlist' className='w-10 h-10' src={wishlist}/>
+        }
+                      </div>
                     <img alt='value' className='w-[137px] h-[75px] object-cover'  src={value.imageURL}/>
                   </div>
               
@@ -86,7 +90,7 @@ const Popular = () => {
      
   if(value.brand===finalselected){
 
-    console.log(value,"VALUEE");
+  
     return(
    
      
