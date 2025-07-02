@@ -61,7 +61,7 @@ const Popular = () => {
         { wishlistarr.includes(value.name)?
       <img alt='wishlisted' className='w-10 h-10 mt-2 object-fill rounded-full' src={wishlisted}/>
       :
-                        <img alt='wishlist' className='w-10 h-10' src={wishlist}/>
+                        <img alt='wishlist' className='w-10 h-10 mt-2' src={wishlist}/>
         }
                       </div>
                     <img alt='value' className='w-[137px] h-[75px] object-cover'  src={value.imageURL}/>
@@ -110,7 +110,7 @@ const Popular = () => {
         { wishlistarr.includes(value.name)?
       <img alt='wishlisted' className='w-10 h-10 mt-2 object-fill rounded-full' src={wishlisted}/>
       :
-                        <img alt='wishlist' className='w-10 h-10' src={wishlist}/>
+                        <img alt='wishlist' className='w-10 h-10 mt-2' src={wishlist}/>
         }
                       </div>
     
