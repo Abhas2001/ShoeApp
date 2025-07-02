@@ -63,13 +63,13 @@ const handleadd = (name) =>{
 }
  
 const handleremovecart = (val) =>{
-  let final = arr.filter((x)=>{
+  let final = cartarr.filter((x)=>{
     return(
       x.name!==val
     )
   })
 
-  console.log(final);
+
   setcartarr(final);
 }
 
